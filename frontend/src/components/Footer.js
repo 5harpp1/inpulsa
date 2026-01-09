@@ -35,9 +35,6 @@ function Footer() {
             <li>
               <Link to="/contacts">Контакты</Link>
             </li>
-            <li>
-              <Link to="/request">Оставить заявку</Link>
-            </li>
           </ul>
         </div>
 

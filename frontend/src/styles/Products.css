@@ -12,6 +12,8 @@
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease,
     border-color 0.25s ease;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .product_block_link {
@@ -37,11 +39,13 @@
 }
 
 .product_block_image img {
-  width: 360px;
+  width: 100%;
+  max-width: 360px;
   height: 315px;
   border-radius: 10px;
   object-fit: cover;
   display: block;
+  margin: 0 auto;
 }
 
 .product_block_content {
@@ -63,14 +67,22 @@
   margin-bottom: 8px;
 }
 
+/* Мобилка */
 @media (max-width: 768px) {
   .products {
-    padding: 32px 16px 48px;
+    padding: 32px 12px 48px;
+  }
+
+  .product_block {
+    margin: 0 0 24px;
+    padding: 16px 14px 18px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .product_block_link {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   .product_block_reverse .product_block_link {
@@ -80,6 +92,11 @@
   .product_block_image {
     flex: none;
     width: 100%;
+  }
+
+  .product_block_image img {
+    max-width: 100%;
+    height: auto;
   }
 
   .product_block_content h1,

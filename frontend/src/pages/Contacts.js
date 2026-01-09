@@ -16,7 +16,10 @@ function Contacts() {
             </p>
 
             <p className="contacts_label">Адрес:</p>
-            <p>426006, Удмуртская Республика, г. Ижевск, ул. Телегина, д. 30, помещ. 26.</p>
+            <p>
+              426006, Удмуртская Республика, г. Ижевск, ул. Телегина, д. 30,
+              помещ. 26.
+            </p>
 
             <p className="contacts_label">Телефон:</p>
             <p>
@@ -29,12 +32,16 @@ function Contacts() {
             </p>
           </div>
         </div>
+
         <div className="contacts_map">
           <h2>Мы на карте</h2>
           <div className="contacts_map_frame">
-            <div className="contacts_map_frame">
-                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A81d033b8e67ce34a26d321c97cbccbe00c1ab288efc7f193d3af0fa8e136722a&amp;source=constructor" width="650" height="360" frameBorder="0"></iframe>
-</div>
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3A81d033b8e67ce34a26d321c97cbccbe00c1ab288efc7f193d3af0fa8e136722a&amp;source=constructor"
+              title="Карта расположения ООО «Инпульса»"
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </section>
