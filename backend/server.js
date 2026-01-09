@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -22,15 +23,12 @@ app.get("/", (req, res) => {
 });
 
 const transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: Number(process.env.MAIL_PORT) || 465,
-  secure: Number(process.env.MAIL_PORT) === 465,
+  host: process.env.MAIL_HOST || "smtp.mail.ru",
+  port: Number(process.env.MAIL_PORT) || 587,
+  secure: false,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
   },
 });
 
@@ -71,6 +69,7 @@ app.post("/api/request", async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
+    console.log("Письмо отправлено успешно");
 
     if (process.env.BITRIX_WEBHOOK_URL) {
       const bitrixUrl =
