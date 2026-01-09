@@ -1,0 +1,101 @@
+.services {
+  padding: 40px 32px 60px;
+  text-align: center;
+}
+
+.services_section {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+}
+
+.services_header {
+  margin-bottom: 16px;
+}
+
+.services_header h1,
+.services_header h2 {
+  font-size: 26px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.services_header p {
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+/* Карточка с услугами */
+.services_card {
+  padding: 20px 18px 22px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  text-align: left;
+}
+
+.services_card h2,
+.services_card h3 {
+  font-size: 20px;
+  margin: 6px 0 10px;
+  color: #111827;
+}
+
+.services_list {
+  margin: 0 0 12px;
+  padding-left: 1.2rem;
+}
+
+.services_list li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.services_license {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 500;
+  margin: 4px 0 12px;
+}
+
+.services_image_wrapper {
+  margin-top: 10px;
+}
+
+.services_image_wrapper img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  display: block;
+}
+
+.services_cta {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 32px 16px 48px;
+  }
+
+  .services_header h1,
+  .services_header h2 {
+    font-size: 22px;
+  }
+
+  .services_card h2,
+  .services_card h3 {
+    font-size: 18px;
+  }
+
+  .services_list li,
+  .services_card p,
+  .services_license {
+    font-size: 13px;
+  }
+}
