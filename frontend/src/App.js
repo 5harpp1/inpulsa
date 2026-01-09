@@ -11,7 +11,8 @@ import EmbeddedSystem from "./pages/EmbeddedSystem";
 import Services from "./pages/Services";
 import Contacts from "./pages/Contacts";
 
-const API_BASE = process.env.REACT_APP_API_URL || "https://inpulsa.onrender.com";
+const API_BASE =
+  process.env.REACT_APP_API_URL || "https://inpulsa-12.onrender.com";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -103,11 +104,17 @@ function App() {
         <Header onRequestClick={openRequestModal} />
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<Home onRequestClick={openRequestModal} />} />
+            <Route
+              path="/"
+              element={<Home onRequestClick={openRequestModal} />}
+            />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/biosignals" element={<Biosignals />} />
-            <Route path="/products/embedded-System" element={<EmbeddedSystem />} />
+            <Route
+              path="/products/embedded-System"
+              element={<EmbeddedSystem />}
+            />
             <Route path="/services" element={<Services />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
