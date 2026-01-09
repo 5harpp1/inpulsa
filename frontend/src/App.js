@@ -11,6 +11,8 @@ import EmbeddedSystem from "./pages/EmbeddedSystem";
 import Services from "./pages/Services";
 import Contacts from "./pages/Contacts";
 
+const API_BASE = process.env.REACT_APP_API_URL || "https://inpulsa.onrender.com";
+
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -43,6 +45,7 @@ function App() {
     e.preventDefault();
     setStatusMessage("");
     setStatusType("");
+
     if (formName.trim().length < 3) {
       setStatusType("error");
       setStatusMessage("Имя должно содержать минимум 3 символа.");
@@ -59,7 +62,7 @@ function App() {
     setIsSending(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/request", {
+      const response = await fetch(`${API_BASE}/api/request`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,11 +103,11 @@ function App() {
         <Header onRequestClick={openRequestModal} />
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<Home onRequestClick={openRequestModal} />}/>
+            <Route path="/" element={<Home onRequestClick={openRequestModal} />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/biosignals" element={<Biosignals />} />
-            <Route path="/products/embedded-System" element={<EmbeddedSystem />}/>
+            <Route path="/products/embedded-System" element={<EmbeddedSystem />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
