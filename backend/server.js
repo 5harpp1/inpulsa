@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
 const axios = require("axios");
 
 const app = express();
@@ -22,24 +21,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Backend ООО «Инпульса» работает" });
 });
 
-const transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST || "smtp.gmail.com",
-  port: Number(process.env.MAIL_PORT) || 587,
-  secure: false,
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("Ошибка подключения к SMTP:", error);
-  } else {
-    console.log("SMTP подключение установлено, готов к отправке писем");
-  }
-});
-
 app.post("/api/request", async (req, res) => {
   const { name, email, phone, message } = req.body;
 
@@ -57,20 +38,7 @@ app.post("/api/request", async (req, res) => {
   });
 
   try {
-    const mailOptions = {
-      from: `"Сайт Инпульса" <${process.env.MAIL_USER}>`,
-      to: process.env.MAIL_TO,
-      subject: "Новая заявка с сайта ООО «Инпульса»",
-      text:
-        `Имя: ${name}\n` +
-        `Телефон: ${phone}\n` +
-        `Email: ${email || "-"}\n\n` +
-        `Сообщение:\n${message || "-"}`,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("Письмо отправлено успешно");
-
+    // Отправка лида в Битрикс24
     if (process.env.BITRIX_WEBHOOK_URL) {
       const bitrixUrl =
         process.env.BITRIX_WEBHOOK_URL + "crm.lead.add.json";
@@ -122,6 +90,7 @@ app.post("/api/request", async (req, res) => {
       );
     }
 
+    // Пользователю всегда успех
     return res.status(200).json({ success: true });
   } catch (error) {
     console.error("Ошибка при обработке заявки:", error);
