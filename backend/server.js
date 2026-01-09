@@ -8,7 +8,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://inpulsa-1.onrender.com",
+    ],
   })
 );
 
@@ -30,6 +33,7 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false,
   },
 });
+
 transporter.verify((error, success) => {
   if (error) {
     console.error("Ошибка подключения к SMTP:", error);
