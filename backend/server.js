@@ -10,6 +10,9 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "http://localhost:5000",
+      "http://inpulsa.ddns.net",
+      "https://inpulsa.ddns.net",
     ],
   })
 );
@@ -30,7 +33,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify((error, success) => {
+transporter.verify((error) => {
   if (error) {
     console.error("Ошибка подключения к SMTP:", error.message);
   } else {
