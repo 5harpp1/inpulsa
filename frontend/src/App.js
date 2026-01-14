@@ -12,7 +12,7 @@ import Services from "./pages/Services";
 import Contacts from "./pages/Contacts";
 
 const API_BASE =
-  process.env.REACT_APP_API_URL || "http://localhost:5000";
+  process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +63,7 @@ function App() {
     setIsSending(true);
 
     try {
-      const response = await fetch(`${API_BASE}/api/request`, {
+      const response = await fetch(`${API_BASE}/request`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
