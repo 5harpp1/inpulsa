@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
+const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,7 +10,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://inpulsa-1.onrender.com",
     ],
   })
 );
@@ -19,6 +18,24 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend ООО «Инпульса» работает" });
+});
+
+const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST || "smtp.gmail.com",
+  port: Number(process.env.MAIL_PORT) || 465,
+  secure: true,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+});
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("Ошибка подключения к SMTP:", error.message);
+  } else {
+    console.log("SMTP подключение установлено, готов к отправке писем");
+  }
 });
 
 app.post("/api/request", async (req, res) => {
@@ -38,65 +55,30 @@ app.post("/api/request", async (req, res) => {
   });
 
   try {
-    // Отправка лида в Битрикс24
-    if (process.env.BITRIX_WEBHOOK_URL) {
-      const bitrixUrl =
-        process.env.BITRIX_WEBHOOK_URL + "crm.lead.add.json";
+    const mailOptions = {
+      from: `"Сайт Инпульса" <${process.env.MAIL_USER}>`,
+      to: process.env.MAIL_TO,
+      subject: "Новая заявка с сайта ООО «Инпульса»",
+      text:
+        `Имя: ${name}\n` +
+        `Телефон: ${phone}\n` +
+        `Email: ${email || "-"}\n\n` +
+        `Сообщение:\n${message || "-"}`,
+    };
 
-      const bitrixPayload = {
-        fields: {
-          TITLE: 'Заявка с сайта ООО "Инпульса"',
-          NAME: name,
-          PHONE: [
-            {
-              VALUE: phone,
-              VALUE_TYPE: "WORK",
-            },
-          ],
-          EMAIL: email
-            ? [
-                {
-                  VALUE: email,
-                  VALUE_TYPE: "WORK",
-                },
-              ]
-            : [],
-          COMMENTS: message || "",
-          SOURCE_ID: "WEB",
-        },
-        params: { REGISTER_SONET_EVENT: "Y" },
-      };
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Письмо отправлено успешно, ответ SMTP:", info);
 
-      try {
-        const resp = await axios.post(bitrixUrl, bitrixPayload);
-        if (resp.data && resp.data.error) {
-          console.error(
-            "Ошибка создания лида в Битрикс24:",
-            resp.data.error,
-            resp.data.error_description
-          );
-        } else {
-          console.log("Лид в Битрикс24 создан, ID:", resp.data.result);
-        }
-      } catch (err) {
-        console.error(
-          "Ошибка HTTP при обращении к Битрикс24:",
-          err.message
-        );
-      }
-    } else {
-      console.warn(
-        "BITRIX_WEBHOOK_URL не задан, лид в Битрикс24 не создаётся"
-      );
-    }
-
-    // Пользователю всегда успех
     return res.status(200).json({ success: true });
   } catch (error) {
-    console.error("Ошибка при обработке заявки:", error);
+    console.error(
+      "Ошибка при отправке письма:",
+      error && error.message,
+      error && error.response && error.response.toString()
+    );
     return res
       .status(500)
-      .json({ success: false, error: "Не удалось обработать заявку" });
+      .json({ success: false, error: "Не удалось отправить заявку" });
   }
 });
 

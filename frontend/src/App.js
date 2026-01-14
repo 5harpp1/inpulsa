@@ -12,7 +12,7 @@ import Services from "./pages/Services";
 import Contacts from "./pages/Contacts";
 
 const API_BASE =
-  process.env.REACT_APP_API_URL || "https://inpulsa-12.onrender.com";
+  process.env.REACT_APP_API_URL || "REACT_APP_API_URL=https://inpulsa-12.onrender.com";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -76,11 +76,20 @@ function App() {
         }),
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
 
-      if (!response.ok || !data.success) {
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        throw new Error("Некорректный ответ сервера");
+      }
+
+      if (!data || !data.success) {
         setStatusType("error");
-        setStatusMessage(data.error || "Ошибка при отправке заявки.");
+        setStatusMessage(data?.error || "Ошибка при отправке заявки.");
       } else {
         setStatusType("success");
         setStatusMessage("Заявка отправлена. Мы свяжемся с вами.");
