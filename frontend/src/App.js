@@ -12,7 +12,7 @@ import Services from "./pages/Services";
 import Contacts from "./pages/Contacts";
 
 const API_BASE =
-  process.env.REACT_APP_API_URL || "REACT_APP_API_URL=https://inpulsa-12.onrender.com";
+  process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
