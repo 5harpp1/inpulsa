@@ -91,7 +91,7 @@ const RequestModal = ({
 
           <button
             type="submit"
-            className="home_button"
+            className="request_button"
             disabled={isSending}
           >
             {isSending ? "Отправка..." : "Отправить заявку"}
