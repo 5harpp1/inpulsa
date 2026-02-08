@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import RequestModal from "./components/RequestModal";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Products from "./pages/Products";
@@ -19,12 +20,15 @@ function App() {
 
   const [formName, setFormName] = useState("");
   const [formPhone, setFormPhone] = useState("");
+  const [cleanPhone, setCleanPhone] = useState("");
   const [formEmail, setFormEmail] = useState("");
   const [formMessage, setFormMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
 
   const [statusMessage, setStatusMessage] = useState("");
   const [statusType, setStatusType] = useState("");
+
+  const isPhoneValid = cleanPhone.length === 11;
 
   const openRequestModal = () => {
     setStatusMessage("");
@@ -36,6 +40,7 @@ function App() {
     setIsModalOpen(false);
     setFormName("");
     setFormPhone("");
+    setCleanPhone("");
     setFormEmail("");
     setFormMessage("");
     setStatusMessage("");
@@ -53,10 +58,9 @@ function App() {
       return;
     }
 
-    const digitsOnly = formPhone.replace(/\D/g, "");
-    if (!/^\d{11}$/.test(digitsOnly)) {
+    if (!isPhoneValid) {
       setStatusType("error");
-      setStatusMessage("Телефон должен содержать ровно 11 цифр.");
+      setStatusMessage("Введите полный номер телефона (11 цифр).");
       return;
     }
 
@@ -70,7 +74,7 @@ function App() {
         },
         body: JSON.stringify({
           name: formName.trim(),
-          phone: digitsOnly,
+          phone: cleanPhone,
           email: formEmail,
           message: formMessage,
         }),
@@ -92,7 +96,7 @@ function App() {
         setStatusMessage(data?.error || "Ошибка при отправке заявки.");
       } else {
         setStatusType("success");
-        setStatusMessage("Заявка отправлена. Мы свяжемся с вами.");
+        setStatusMessage("Заявка отправлена в Bitrix24 + на email");
         setTimeout(() => {
           closeRequestModal();
         }, 2000);
@@ -129,72 +133,25 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        {isModalOpen && (
-          <div className="modal_overlay" onClick={closeRequestModal}>
-            <div
-              className="modal_content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button className="modal_close" onClick={closeRequestModal}>
-                ×
-              </button>
-              <h3>Оставить заявку</h3>
-              <form className="modal_form" onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="Имя"
-                  required
-                  value={formName}
-                  onChange={(e) => setFormName(e.target.value)}
-                />
-                <input
-                  type="tel"
-                  placeholder="Телефон"
-                  required
-                  value={formPhone}
-                  maxLength={11}
-                  onChange={(e) => {
-                    const onlyDigits = e.target.value.replace(/\D/g, "");
-                    setFormPhone(onlyDigits.slice(0, 11));
-                  }}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  required
-                  value={formEmail}
-                  onChange={(e) => setFormEmail(e.target.value)}
-                />
-                <textarea
-                  placeholder="Кратко опишите задачу"
-                  rows="4"
-                  value={formMessage}
-                  onChange={(e) => setFormMessage(e.target.value)}
-                />
-
-                {statusMessage && (
-                  <div
-                    className={
-                      statusType === "success"
-                        ? "modal_status modal_status_success"
-                        : "modal_status modal_status_error"
-                    }
-                  >
-                    {statusMessage}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="home_button"
-                  disabled={isSending}
-                >
-                  {isSending ? "Отправка..." : "Отправить"}
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
+        <RequestModal
+          isOpen={isModalOpen}
+          onClose={closeRequestModal}
+          onSubmit={handleSubmit}
+          formName={formName}
+          setFormName={setFormName}
+          formPhone={formPhone}
+          setFormPhone={setFormPhone}
+          cleanPhone={cleanPhone}
+          setCleanPhone={setCleanPhone}
+          formEmail={formEmail}
+          setFormEmail={setFormEmail}
+          formMessage={formMessage}
+          setFormMessage={setFormMessage}
+          isSending={isSending}
+          statusMessage={statusMessage}
+          statusType={statusType}
+          isPhoneValid={isPhoneValid}
+        />
       </div>
     </Router>
   );

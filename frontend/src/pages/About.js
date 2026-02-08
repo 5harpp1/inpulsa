@@ -52,12 +52,11 @@ function About() {
       setCurrent((prev) => (prev + 1) % advantages.length);
     }, 12000);
 
-    return () => clearInterval(interval); // очищаем, чтобы не плодить таймеры
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="about">
-      {/* Слайдер преимуществ */}
       <section className="about_slider_section">
         <h1>О компании</h1>
         <p className="about_subtitle">
@@ -66,7 +65,6 @@ function About() {
         </p>
 
         <div className="about_slider">
-          {/* Слайд */}
           <div
             className="about_slider_slide about_slider_slide_fade"
             key={current}
@@ -78,7 +76,6 @@ function About() {
               ), url(${advantages[current].bg})`,
             }}
           >
-            {/* Стрелки ВНУТРИ слайда */}
             <button
               className="about_slider_arrow about_slider_arrow_left"
               onClick={prevSlide}
@@ -116,8 +113,6 @@ function About() {
           </div>
         </div>
       </section>
-
-      {/* Текстовый блок «О нас» */}
       <section className="about_text_section">
         <h2>О нас</h2>
 

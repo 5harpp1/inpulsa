@@ -67,7 +67,6 @@
   margin-bottom: 8px;
 }
 
-/* Мобилка */
 @media (max-width: 768px) {
   .products {
     padding: 32px 12px 48px;

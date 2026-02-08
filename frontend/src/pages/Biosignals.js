@@ -8,7 +8,6 @@ import biosignalsExtra2 from "../images/biosignals-extra-2.png";
 function Biosignals() {
   return (
     <div className="biosignals">
-      {/* Блок 1: архитектура + картинка */}
       <section className="biosignals_section">
         <div className="biosignals_header">
           <h1>Архитектура телемедицинского комплекса</h1>
@@ -26,7 +25,6 @@ function Biosignals() {
         </div>
       </section>
 
-      {/* Блок 2: возможности комплекса + картинки снизу */}
       <section className="biosignals_section">
         <div className="biosignals_header">
           <h2>Возможности телемедицинского комплекса</h2>
@@ -78,8 +76,6 @@ function Biosignals() {
             </li>
           </ol>
         </div>
-
-        {/* Две картинки под возможностями */}
         <div className="biosignals_images_row">
           <div className="biosignals_image_item">
             <img

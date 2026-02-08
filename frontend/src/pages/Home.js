@@ -13,10 +13,9 @@ function Home({ onRequestClick }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !entry.target.classList.contains("section_visible")) {
             entry.target.classList.add("section_visible");
-          } else {
-            entry.target.classList.remove("section_visible");
+            observer.unobserve(entry.target);
           }
         });
       },
