@@ -1,0 +1,48 @@
+.modal_form input,
+.modal_form textarea {
+  max-width: 450px !important;     /* Фиксируем ширину полей */
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+
+/* КНОПКА тоже */
+.home_button {
+  max-width: 350px !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* Рамка шире */
+.modal_content {
+  max-width: 550px !important;
+  padding: 50px 70px !important;
+}
+.modal_status {
+  padding: 12px 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal_status.success {
+  background: #d4edda;
+  color: #155724;
+  border-color: #28a745;
+}
+
+.modal_status.error {
+  background: #f8d7da;
+  color: #721c24;
+  border-color: #dc3545;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

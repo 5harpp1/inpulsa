@@ -7,7 +7,7 @@ const axios = require("axios");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const BITRIX_WEBHOOK = 'https://b24-ccgxee.bitrix24.ru/rest/1/7i74vqlbhssepehx/crm.lead.add';
+const BITRIX_WEBHOOK = 'https://b24-ccgxee.bitrix24.ru/rest/1/1cpl3i2u0lh40ro6/crm.lead.add';
 
 app.use(
   cors({
@@ -23,7 +23,7 @@ app.use(
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "Backend ООО «Инпульса» работает" });
+  res.json({ message: "Backend работает" });
 });
 
 const transporter = nodemailer.createTransporter({
@@ -87,16 +87,13 @@ app.post("/api/request", async (req, res) => {
             SOURCE_ID: 1,
             ASSIGNED_BY_ID: 1, 
             STATUS_ID: 'NEW',
-            OPPORTUNITY: 1000 
           }
         });
         console.log("Лид создан в Bitrix24");
       } catch (bitrixErr) {
         console.error("Bitrix24 ошибка:", bitrixErr.response?.data || bitrixErr.message);
       }
-    } else {
-      console.log("Bitrix24 webhook не настроен, пропускаем");
-    }
+    } 
 
     return res.status(200).json({ success: true });
   } catch (error) {

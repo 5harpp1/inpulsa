@@ -96,7 +96,7 @@ function App() {
         setStatusMessage(data?.error || "Ошибка при отправке заявки.");
       } else {
         setStatusType("success");
-        setStatusMessage("Заявка отправлена в Bitrix24 + на email");
+        setStatusMessage("Заявка отправлена");
         setTimeout(() => {
           closeRequestModal();
         }, 2000);

@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/RequestModal.css";
 
 const RequestModal = ({ 
   isOpen, 
@@ -13,6 +14,7 @@ const RequestModal = ({
   statusMessage,
   statusType
 }) => {
+  
   const formatPhone = (value) => {
     let digits = value.replace(/\D/g, '');
     
@@ -37,7 +39,6 @@ const RequestModal = ({
   const handlePhoneChange = (e) => {
     const formatted = formatPhone(e.target.value);
     setFormPhone(formatted);
-    
     const clean = formatted.replace(/\D/g, '');
     setCleanPhone(clean);
   };
@@ -65,6 +66,7 @@ const RequestModal = ({
             value={formPhone}
             onChange={handlePhoneChange}
             maxLength="18"
+            required
           />
           
           <input
@@ -92,7 +94,7 @@ const RequestModal = ({
             className="home_button"
             disabled={isSending}
           >
-            {isSending ? "Отправка..." : "Отправить"}
+            {isSending ? "Отправка..." : "Отправить заявку"}
           </button>
         </form>
       </div>
@@ -101,3 +103,4 @@ const RequestModal = ({
 };
 
 export default RequestModal;
+
