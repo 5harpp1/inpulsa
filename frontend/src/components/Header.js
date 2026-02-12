@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../images/logo-inpulsa.png";
+import logo from "../images/logo-inpulsa.webp";
 import "../styles/Header.css";
 
 function Header({ onRequestClick }) {

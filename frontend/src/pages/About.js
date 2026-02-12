@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../styles/About.css";
 
-import slideBg1 from "../images/slide-1.jpg";
-import slideBg2 from "../images/slide-2.jpg";
-import slideBg3 from "../images/slide-3.jpg";
-import slideBg4 from "../images/slide-4.jpg";
+import slideBg1 from "../images/slide-1.webp";
+import slideBg2 from "../images/slide-2.webp";
+import slideBg3 from "../images/slide-3.webp";
+import slideBg4 from "../images/slide-4.webp";
 
 const advantages = [
   {

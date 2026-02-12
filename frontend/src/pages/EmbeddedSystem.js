@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/EmbeddedSystem.css";
-import embeddedScheme from "../images/embedded-scheme.png";
+import embeddedScheme from "../images/embedded-scheme.webp";
 
 function EmbeddedSystem() {
   return (

@@ -3,10 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
-
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 const BITRIX_WEBHOOK = 'https://b24-ccgxee.bitrix24.ru/rest/1/1cpl3i2u0lh40ro6/crm.lead.add';
 
 app.use(cors({
@@ -38,7 +36,7 @@ transporter.verify((error) => {
   if (error) {
     console.error("Ошибка подключения к SMTP:", error.message);
   } else {
-    console.log("SMTP подключение установлено, готов к отправке писем");
+    console.log("SMTP подключение установлено");
   }
 });
 
@@ -88,7 +86,7 @@ app.post("/api/request", async (req, res) => {
             STATUS_ID: "NEW",
           },
         });
-        console.log("Лид создан в Bitrix24");
+        console.log("Лид создан");
       } catch (bitrixErr) {
         console.error("Bitrix24 ошибка:", bitrixErr.response?.data || bitrixErr.message);
       }

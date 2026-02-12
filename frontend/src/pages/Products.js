@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Products.css";
-import biosignalsImg from "../images/product-biosignals.png";
-import embeddedImg from "../images/product-embedded.jpg";
+import biosignalsImg from "../images/product-biosignals.webp";
+import embeddedImg from "../images/product-embedded.webp";
 
 function Products() {
   return (

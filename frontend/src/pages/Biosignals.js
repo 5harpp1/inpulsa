@@ -1,9 +1,8 @@
 import React from "react";
 import "../styles/Biosignals.css";
-
-import biosignalsArchImg from "../images/biosignals-architecture.png";
-import biosignalsExtra1 from "../images/biosignals-extra-1.png";
-import biosignalsExtra2 from "../images/biosignals-extra-2.png";
+import biosignalsArchImg from "../images/biosignals-architecture.webp";
+import biosignalsExtra1 from "../images/biosignals-extra-1.webp";
+import biosignalsExtra2 from "../images/biosignals-extra-2.webp";
 
 function Biosignals() {
   return (

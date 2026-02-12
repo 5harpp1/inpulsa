@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Services.css";
-import servicesDevImg from "../images/services-dev.png";
-import servicesServiceImg from "../images/services-service.jpg";
+import servicesDevImg from "../images/services-dev.webp";
+import servicesServiceImg from "../images/services-service.webp";
 
 function Services() {
   return (

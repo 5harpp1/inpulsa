@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import telemedicineIcon from "../images/telemedicine.png";
-import deviceControlIcon from "../images/device-control.png";
-import softwareDevIcon from "../images/software-dev.png";
-import serviceIcon from "../images/service.png";
+import telemedicineIcon from "../images/telemedicine.webp";
+import deviceControlIcon from "../images/device-control.webp";
+import softwareDevIcon from "../images/software-dev.webp";
+import serviceIcon from "../images/service.webp";
 import "../styles/Home.css";
 
 function Home({ onRequestClick }) {
