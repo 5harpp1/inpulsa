@@ -24,6 +24,9 @@ function Footer() {
           <h4>Навигация</h4>
           <ul>
             <li>
+              <Link to="/">Главная</Link>
+            </li>
+            <li>
               <Link to="/about">О компании</Link>
             </li>
             <li>
