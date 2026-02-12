@@ -9,6 +9,11 @@ function Header({ onRequestClick }) {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
+  const handleRequestClick = () => {
+    onRequestClick();
+    closeMenu();
+  };
+
   return (
     <header className="header">
       <div className="header_logo">
@@ -66,6 +71,9 @@ function Header({ onRequestClick }) {
         <NavLink to="/contacts" className="header_link" onClick={closeMenu}>
           Контакты
         </NavLink>
+        <button className="header_button_mobile" onClick={handleRequestClick}>
+          Оставить заявку
+        </button>
       </nav>
 
       <div className="header_contacts">
